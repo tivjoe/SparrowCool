@@ -6,6 +6,7 @@ import { NavigationBar } from '../../SparrowCool'
  * @file 可返回导航栏
  */
 export interface Props {
+    style?: StyleProp<ViewStyle>;
     title?: string;
     titleStyle?: StyleProp<ViewStyle>;
     backIconComponent: React.ReactNode;
@@ -15,6 +16,7 @@ export interface Props {
 export const NavigationBackBar: React.FC<Props> = (props) => {
     return (
         <NavigationBar
+            style={[props.style]}
             leftComponent={
                 <TouchableOpacity onPress={props.onPressBack} >
                     {props.backIconComponent}
