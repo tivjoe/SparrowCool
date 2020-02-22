@@ -13,12 +13,14 @@ class App extends Component {
       //   <Text>Magic SparrowCool!</Text>
       // </View>
       <NavigationSpringBar
-        defaultHeader={<NavigationBackBar backIconComponent={<Text>default</Text>} onPressBack={() => { }} />}
-        defaultHeaderHeight={44}
-        alwayShowComponent={<NavigationBackBar backIconComponent={<Text>always</Text>} onPressBack={() => { }} />}
-        onPullUpShowHeader={<NavigationBackBar backIconComponent={<Text>pullUp</Text>} onPressBack={() => { }} />}
+        defaultHeaderHeight={88}
+        onPullUpShowHeaderHeight={44}
+        defaultHeader={<NavigationBackBar style={{ backgroundColor: "red", height: 88 }} backIconComponent={<Text>default</Text>} onPressBack={() => { }} />}
+        alwayShowComponent={<NavigationBackBar style={{ backgroundColor: "blue" }} backIconComponent={<Text>always</Text>} onPressBack={() => { }} />}
+        onPullUpShowHeader={<NavigationBackBar style={{ backgroundColor: "yellow" }} backIconComponent={<Text>pullUp</Text>} onPressBack={() => { }} />}
         bodyContainer={
           <FlatList
+            style={{ flex: 1 }}
             data={[
               0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
               0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
