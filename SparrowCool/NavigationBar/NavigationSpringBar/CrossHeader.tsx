@@ -8,6 +8,7 @@ import AnimatedStyles from './AnimatedStyles';
  */
 export interface Props {
     isMomentumScrollEnd: boolean;
+    isMomentumScrollToBottom: boolean;
     currentGesture: string;
     scrollY: Animated.Value;
     scrollYValue: number;
@@ -18,6 +19,8 @@ export interface Props {
     onPullUpShowHeader?: React.ReactNode;
     onPullUpShowHeaderHeight?: number;
     alwayShowComponent?: React.ReactNode;
+    isShowDefaultHeaderOnDown?: boolean;
+    isShowDefaultHeaderOnDownMoveY?: number;
 }
 
 export const CrossHeader: React.FC<Props> = (props) => {
@@ -28,11 +31,19 @@ export const CrossHeader: React.FC<Props> = (props) => {
             props.scrollYValue < props.defaultHeaderHeight // 顶部时
             ||
             (
-                // 不在顶部且上滑时
-                ((props.scrollYValue > props.defaultHeaderHeight + (props.onPullUpShowHeaderHeight === null ? props.onPullUpShowHeaderHeight : 0) && props.currentGesture === "onDown"))
+                props.isShowDefaultHeaderOnDown === true
                 &&
-                // 向上滑动超过300
-                (props.isMomentumScrollEnd === true && props.scrollYValue < (props.scrollBeginYValue - 600))
+                (
+                    (
+                        // 不在顶部且上滑时
+                        ((props.scrollYValue > props.defaultHeaderHeight + (props.onPullUpShowHeaderHeight === null ? props.onPullUpShowHeaderHeight : 0) && props.currentGesture === "onDown"))
+                        &&
+                        // 向上滑动超过600
+                        (props.isMomentumScrollEnd === true && props.scrollYValue < props.scrollBeginYValue - (props.isShowDefaultHeaderOnDownMoveY === undefined ? 600 : props.isShowDefaultHeaderOnDownMoveY))
+                    )
+                    ||
+                    props.isMomentumScrollToBottom === true //在底部时
+                )
             )
         ) {
             return true; // show defaultHeader

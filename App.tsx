@@ -15,6 +15,9 @@ class App extends Component {
       <NavigationSpringBar
         defaultHeaderHeight={88}
         onPullUpShowHeaderHeight={44}
+        isShowDefaultHeaderOnScrollToBottom={true}
+        isShowDefaultHeaderOnDown={true}
+        isShowDefaultHeaderOnDownMoveY={600}
         defaultHeader={<NavigationBackBar style={{ backgroundColor: "red", height: 88 }} backIconComponent={<Text>default</Text>} onPressBack={() => { }} />}
         alwayShowComponent={<NavigationBackBar style={{ backgroundColor: "blue" }} backIconComponent={<Text>always</Text>} onPressBack={() => { }} />}
         onPullUpShowHeader={<NavigationBackBar style={{ backgroundColor: "yellow" }} backIconComponent={<Text>pullUp</Text>} onPressBack={() => { }} />}

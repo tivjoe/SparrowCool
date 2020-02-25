@@ -8,10 +8,13 @@ import { CrossHeader } from './CrossHeader';
 export interface Props {
     defaultHeader: React.ReactNode; // 默认显示的导航栏,下滑时显示的导航栏
     defaultHeaderHeight: number; // 默认显示导航栏的高度
-    onPullUpShowHeader?: React.ReactNode; // 上滑时显示的导航栏
-    onPullUpShowHeaderHeight?: number; // 上滑时显示的导航栏的高度
-    alwayShowComponent?: React.ReactNode; // 一直显示的组件
     bodyContainer: React.ReactNode; // 主要内容
+    alwayShowComponent?: React.ReactNode; // 一直显示的组件
+    onPullUpShowHeader?: React.ReactNode; // 上滑时显示的导航栏
+    onPullUpShowHeaderHeight?: number; // 上滑导航栏的高度
+    isShowDefaultHeaderOnScrollToBottom?: boolean; // 滑动到底部时，是否显示默认导航栏 默认：true
+    isShowDefaultHeaderOnDown?: boolean; // 下滑时是否显示默认导航栏 默认：true
+    isShowDefaultHeaderOnDownMoveY?: number; // 下滑多少距离时显示defaultHeader，默认值：600
 }
 
 export const NavigationSpringBar: React.FC<Props> = (props) => {
@@ -25,6 +28,7 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
     const [panY] = React.useState(new Animated.Value(0));
     const [currentGesture, setCurrentGesture] = React.useState("onDown");
     const [isMomentumScrollEnd, setIsMomentumScrollEnd] = React.useState(false);
+    const [isMomentumScrollToBottom, setIsMomentumScrollToBottom] = React.useState(false);
 
     const refAnimatedScrollView = React.useRef<any>(null); // TO_DO : 找到相应类型替换any, 这是react-native bug
 
@@ -44,14 +48,28 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
             panY.removeAllListeners();
             scrollBeginY.removeAllListeners();
         }
-    }, [scrollYValue === -1, scrollBeginYValue === -1, currentGesture, isMomentumScrollEnd]) //保证只存在一个监听
+    }, [scrollYValue === -1, scrollBeginYValue === -1, currentGesture, isMomentumScrollEnd, isMomentumScrollToBottom]) //保证只存在一个监听
 
+    // ScrollView滑动到顶部
     const scrollToTop = () => {
         if (refAnimatedScrollView.current !== null) {
             refAnimatedScrollView.current.getNode().scrollTo({ x: 0, y: 0, animated: true }); // TO_DO : getNode() 得去掉,但是去掉了就报错，react-native bug
         }
     }
 
+    // 当滑动到底部时
+    const onMomentumScrollEndToBottom = (offsetY: number, origanScrollHeight: number, contentSizeHeight: number) => {
+        if (props.isShowDefaultHeaderOnScrollToBottom === true) {
+            offsetY + origanScrollHeight >= contentSizeHeight ? setIsMomentumScrollToBottom(true) : setIsMomentumScrollToBottom(false);
+        }
+    }
+
+    // 当滑动没有超过指定距离时
+    const onMomentumScrollEndIsExceedDistance = () => {
+        scrollYValue < props.defaultHeaderHeight + (props.onPullUpShowHeaderHeight === undefined ? 0 : props.onPullUpShowHeaderHeight) ? scrollToTop() : null;
+    }
+
+    // 手势
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onMoveShouldSetPanResponder: () => true,
@@ -67,17 +85,19 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
             style={[styles.container]}
             scrollEventThrottle={1}
             showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps='handled'
             onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }])}
             onScrollBeginDrag={Animated.event([{ nativeEvent: { contentOffset: { y: scrollBeginY } } }])}
-            onMomentumScrollEnd={() => {
-                // TO_DO 滚动到底部，显示defaultHeader 
+            onMomentumScrollEnd={(e: { nativeEvent: { contentOffset: { y: number }, contentSize: { height: number }, layoutMeasurement: { height: number } } }) => {
                 setIsMomentumScrollEnd(true);
-                scrollYValue < props.defaultHeaderHeight + (props.onPullUpShowHeaderHeight === undefined ? 0 : props.onPullUpShowHeaderHeight) ? scrollToTop() : null;
+                onMomentumScrollEndToBottom(e.nativeEvent.contentOffset.y, e.nativeEvent.layoutMeasurement.height, e.nativeEvent.contentSize.height);
+                onMomentumScrollEndIsExceedDistance();
             }}
         >
 
             <CrossHeader
                 isMomentumScrollEnd={isMomentumScrollEnd}
+                isMomentumScrollToBottom={isMomentumScrollToBottom}
                 currentGesture={currentGesture}
                 scrollY={scrollY}
                 scrollYValue={scrollYValue}
@@ -88,6 +108,8 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
                 onPullUpShowHeader={props.onPullUpShowHeader}
                 onPullUpShowHeaderHeight={props.onPullUpShowHeaderHeight}
                 alwayShowComponent={props.alwayShowComponent}
+                isShowDefaultHeaderOnDown={props.isShowDefaultHeaderOnDown}
+                isShowDefaultHeaderOnDownMoveY={props.isShowDefaultHeaderOnDownMoveY}
             />
 
             {props.bodyContainer}
@@ -97,7 +119,10 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
 };
 
 NavigationSpringBar.defaultProps = {
-    onPullUpShowHeaderHeight: 0
+    onPullUpShowHeaderHeight: 0,
+    isShowDefaultHeaderOnScrollToBottom: true,
+    isShowDefaultHeaderOnDown: true,
+    isShowDefaultHeaderOnDownMoveY: 600
 }
 
 const styles = StyleSheet.create({
