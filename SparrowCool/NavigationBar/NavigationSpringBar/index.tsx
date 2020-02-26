@@ -77,12 +77,45 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
         onPanResponderMove: Animated.event([null, { dy: panY }])
     })
 
+    // 判断显示哪个header
+    const isShowHeader = () => {
+        if
+            (
+            scrollYValue < props.defaultHeaderHeight // 顶部时
+            ||
+            (
+                props.isShowDefaultHeaderOnDown === true
+                &&
+                (
+                    (
+                        // 不在顶部且上滑时
+                        ((scrollYValue > props.defaultHeaderHeight + (props.onPullUpShowHeaderHeight === null ? props.onPullUpShowHeaderHeight : 0) && currentGesture === "onDown"))
+                        &&
+                        (
+                            //滑动距离在大于600时
+                            scrollYValue > 600
+                            &&
+                            // 向上滑动超过600
+                            (isMomentumScrollEnd === true && scrollYValue < scrollBeginYValue - (props.isShowDefaultHeaderOnDownMoveY === undefined ? 600 : props.isShowDefaultHeaderOnDownMoveY))
+                        )
+                    )
+                    ||
+                    isMomentumScrollToBottom === true //在底部时
+                )
+            )
+        ) {
+            return true; // show defaultHeader
+        } else {
+            return false; // show onPullUpShowHeader
+        }
+    }
+
     return (
         <Animated.ScrollView
             {...panResponder.panHandlers}
-            stickyHeaderIndices={[0]}
             ref={refAnimatedScrollView}
-            style={[styles.container]}
+            stickyHeaderIndices={[0]}
+            style={styles.container}
             scrollEventThrottle={1}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps='handled'
@@ -94,26 +127,19 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
                 onMomentumScrollEndIsExceedDistance();
             }}
         >
-
             <CrossHeader
-                isMomentumScrollEnd={isMomentumScrollEnd}
-                isMomentumScrollToBottom={isMomentumScrollToBottom}
-                currentGesture={currentGesture}
+                isShowHeader={() => isShowHeader()}
                 scrollY={scrollY}
                 scrollYValue={scrollYValue}
                 scrollBeginY={scrollBeginY}
-                scrollBeginYValue={scrollBeginYValue}
                 defaultHeader={props.defaultHeader}
                 defaultHeaderHeight={props.defaultHeaderHeight}
                 onPullUpShowHeader={props.onPullUpShowHeader}
                 onPullUpShowHeaderHeight={props.onPullUpShowHeaderHeight}
                 alwayShowComponent={props.alwayShowComponent}
                 isShowDefaultHeaderOnDown={props.isShowDefaultHeaderOnDown}
-                isShowDefaultHeaderOnDownMoveY={props.isShowDefaultHeaderOnDownMoveY}
             />
-
             {props.bodyContainer}
-
         </Animated.ScrollView>
     );
 };

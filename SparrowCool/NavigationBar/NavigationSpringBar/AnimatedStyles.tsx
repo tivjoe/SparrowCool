@@ -3,47 +3,49 @@ import { Animated } from 'react-native';
 /**
  * @file 动画样式
  */
-const animatedStyles = (styleName: string, scrollY: Animated.Value, defaultHeaderHeight: number, scrollBeginYValue: number, onPullUpShowHeaderHeight?: number) => {
-    switch (styleName) {
-        case "translateY_default":
-            return {
-                opacity: scrollY.interpolate({
-                    inputRange: [0, defaultHeaderHeight],
-                    outputRange: [1, 0.3]
-                }),
-                transform: [{
-                    translateY: scrollY.interpolate({
-                        inputRange: [0, defaultHeaderHeight],
-                        outputRange: [0, 0 - defaultHeaderHeight],
-                        extrapolate: 'clamp'
-                    })
-                }],
-            }
-        // case "fade_default_down":
-        //     return {
-        //         opacity: scrollY.interpolate({
-        //             inputRange: [scrollBeginYValue - 200, scrollBeginYValue - 200 - defaultHeaderHeight],
-        //             outputRange: [1, 0.3]
-        //         }),
-        //     }
-        case "translateY_onPullUp":
-            return {
-                opacity: scrollY.interpolate({
-                    inputRange: [defaultHeaderHeight, defaultHeaderHeight + defaultHeaderHeight / 2],
-                    outputRange: [0.3, 1],
-                    extrapolate: 'clamp'
-                }),
-                transform: [{
-                    translateY: scrollY.interpolate({
-                        inputRange: [defaultHeaderHeight, defaultHeaderHeight + defaultHeaderHeight / 2],
-                        outputRange: [0 - (onPullUpShowHeaderHeight === undefined ? 0 : onPullUpShowHeaderHeight), 0],
-                        extrapolate: 'clamp'
-                    })
-                }],
-            }
-        default:
-            return {}
+
+// ScrollView,marginTo变化
+export const styleCrossHeaderBottom = (scrollY: Animated.Value, defaultHeaderHeight: number) => {
+    return {
+        bottom: scrollY.interpolate({
+            inputRange: [0, defaultHeaderHeight],
+            outputRange: [0, 88],
+            extrapolate: 'clamp'
+        }),
     }
 }
 
-export default animatedStyles;
+// 下滑时导航栏，上下移+透明
+export const styleDefaultOpacity = (scrollY: Animated.Value, defaultHeaderHeight: number) => {
+    return {
+        opacity: scrollY.interpolate({
+            inputRange: [0, defaultHeaderHeight],
+            outputRange: [1, 0.3]
+        }),
+        // transform: [{
+        //     translateY: scrollY.interpolate({
+        //         inputRange: [0, defaultHeaderHeight],
+        //         outputRange: [0, 0 - defaultHeaderHeight],
+        //         extrapolate: 'clamp'
+        //     })
+        // }],
+    }
+}
+
+// 上滑时导航栏，上下移+透明
+export const styleOnPullUpOpacity = (scrollY: Animated.Value, defaultHeaderHeight: number, onPullUpShowHeaderHeight: number = 0) => {
+    return {
+        opacity: scrollY.interpolate({
+            inputRange: [defaultHeaderHeight, defaultHeaderHeight + defaultHeaderHeight / 2],
+            outputRange: [0.3, 1],
+            extrapolate: 'clamp'
+        }),
+        // transform: [{
+        //     translateY: scrollY.interpolate({
+        //         inputRange: [defaultHeaderHeight, defaultHeaderHeight + defaultHeaderHeight / 2],
+        //         outputRange: [0 - onPullUpShowHeaderHeight, 0],
+        //         extrapolate: 'clamp'
+        //     })
+        // }],
+    }
+}

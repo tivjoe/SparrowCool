@@ -37,7 +37,8 @@ class App extends Component {
               0, 0, 0, 0, 0, 0, 0, 0, 0, 0
             ]}
             renderItem={({ item, index }) => <NavigationBar centerComponent={<Text>{index}</Text>} />}
-          />}
+          />
+        }
       />
 
 
