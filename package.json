@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/HackJoe/SparrowCool.git"
   },
   "keywords": [
     "SparrowCool",
@@ -23,7 +23,6 @@
   "author": "HackJoe",
   "license": "MIT",
   "readmeFilename": "README.md",
-  "homepage": "",
   "peerDependencies": {
     "react": "^16.8.1",
     "react-native": ">=0.60.0-rc.0 <1.0.x"
