@@ -2,7 +2,7 @@
   "name": "sparrowcool",
   "version": "0.0.2",
   "description": "A UI library and native library with hooks for react native.",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"

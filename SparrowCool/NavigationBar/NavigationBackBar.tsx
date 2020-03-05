@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
-import { NavigationBar } from '../../SparrowCool'
+import { NavigationBar } from '../../index'
 
 /**
  * @file 可返回导航栏
