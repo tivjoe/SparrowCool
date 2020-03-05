@@ -1,5 +1,5 @@
 {
-  "name": "SparrowCool",
+  "name": "sparrowcool",
   "version": "0.0.2",
   "description": "A UI library and native library with hooks for react native.",
   "main": "index.js",
