@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, StyleSheet, PanResponder } from 'react-native';
+import { Animated, StyleSheet, PanResponder, StyleProp, ViewStyle } from 'react-native';
 import { CrossHeader } from './CrossHeader';
 
 /**
@@ -9,6 +9,7 @@ export interface Props {
     defaultHeader: React.ReactNode; // 默认显示的导航栏,下滑时显示的导航栏
     defaultHeaderHeight: number; // 默认显示导航栏的高度
     bodyContainer: React.ReactNode; // 主要内容
+    style: StyleProp<ViewStyle>;
     alwayShowComponent?: React.ReactNode; // 一直显示的组件
     onPullUpShowHeader?: React.ReactNode; // 上滑时显示的导航栏
     onPullUpShowHeaderHeight?: number; // 上滑导航栏的高度
@@ -115,7 +116,7 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
             {...panResponder.panHandlers}
             ref={refAnimatedScrollView}
             stickyHeaderIndices={[0]}
-            style={styles.container}
+            style={[styles.container, props.style]}
             scrollEventThrottle={1}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps='handled'
@@ -154,5 +155,6 @@ NavigationSpringBar.defaultProps = {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: "#dedede"
     }
 });

@@ -18,11 +18,11 @@ export const NavigationBackBar: React.FC<Props> = (props) => {
         <NavigationBar
             style={[props.style]}
             leftComponent={
-                <TouchableOpacity onPress={props.onPressBack} >
+                <TouchableOpacity onPress={props.onPressBack} hitSlop={{top: 44, left: 44, bottom: 44, right: 44}} >
                     {props.backIconComponent}
                 </TouchableOpacity>
             }
-            centerComponent={<Text style={[styles.title, props.titleStyle]} >{props.title}</Text>}
+            centerComponent={<Text style={[styles.title, props.titleStyle]} numberOfLines={1} ellipsizeMode='tail' >{props.title}</Text>}
         />
     )
 };
@@ -30,6 +30,6 @@ export const NavigationBackBar: React.FC<Props> = (props) => {
 const styles = StyleSheet.create({
     title: {
         fontSize: 16,
-        fontWeight: "500",
+        fontWeight:"bold",
     }
 });
