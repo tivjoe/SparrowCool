@@ -9,7 +9,7 @@ export interface Props {
     defaultHeader: React.ReactNode; // 默认显示的导航栏,下滑时显示的导航栏
     defaultHeaderHeight: number; // 默认显示导航栏的高度
     bodyContainer: React.ReactNode; // 主要内容
-    style: StyleProp<ViewStyle>;
+    style?: StyleProp<ViewStyle>;
     alwayShowComponent?: React.ReactNode; // 一直显示的组件
     onPullUpShowHeader?: React.ReactNode; // 上滑时显示的导航栏
     onPullUpShowHeaderHeight?: number; // 上滑导航栏的高度
