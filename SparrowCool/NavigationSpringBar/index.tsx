@@ -18,7 +18,7 @@ export interface Props {
     isShowDefaultHeaderOnDownMoveY?: number; // 下滑多少距离时显示defaultHeader，默认值：600
 }
 
-export const NavigationSpringBar: React.FC<Props> = (props) => {
+export const NavigationSpringBar: React.FC<Props> = React.memo((props) => {
 
     const [scrollY] = React.useState(new Animated.Value(0));
     const [scrollYValue, setScrollYValue] = React.useState(-1);
@@ -31,7 +31,7 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
     const [isMomentumScrollEnd, setIsMomentumScrollEnd] = React.useState(false);
     const [isMomentumScrollToBottom, setIsMomentumScrollToBottom] = React.useState(false);
 
-    const refAnimatedScrollView = React.useRef<any>(null); // TO_DO : 找到相应类型替换any, 这是react-native bug
+    const refAnimatedScrollView = React.useRef<any>(null); // TO_DO : 找到相应类型替换any
 
     React.useEffect(() => {
 
@@ -54,7 +54,7 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
     // ScrollView滑动到顶部
     const scrollToTop = () => {
         if (refAnimatedScrollView.current !== null) {
-            refAnimatedScrollView.current.getNode().scrollTo({ x: 0, y: 0, animated: true }); // TO_DO : getNode() 得去掉,但是去掉了就报错，react-native bug
+            refAnimatedScrollView.current.scrollTo({ x: 0, y: 0, animated: true }); // TO_DO : getNode() 得去掉,但是去掉了就报错，react-native bug
         }
     }
 
@@ -75,7 +75,7 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
         onStartShouldSetPanResponder: () => true,
         onMoveShouldSetPanResponder: () => true,
         onPanResponderGrant: () => setIsMomentumScrollEnd(false),
-        onPanResponderMove: Animated.event([null, { dy: panY }])
+        onPanResponderMove: Animated.event([null, { dy: panY }], { useNativeDriver: false })  // 手势无法启用原生模块
     })
 
     // 判断显示哪个header
@@ -120,8 +120,8 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
             scrollEventThrottle={1}
             showsVerticalScrollIndicator={false}
             keyboardShouldPersistTaps='handled'
-            onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }])}
-            onScrollBeginDrag={Animated.event([{ nativeEvent: { contentOffset: { y: scrollBeginY } } }])}
+            onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+            onScrollBeginDrag={Animated.event([{ nativeEvent: { contentOffset: { y: scrollBeginY } } }], { useNativeDriver: true })}
             onMomentumScrollEnd={(e: { nativeEvent: { contentOffset: { y: number }, contentSize: { height: number }, layoutMeasurement: { height: number } } }) => {
                 setIsMomentumScrollEnd(true);
                 onMomentumScrollEndToBottom(e.nativeEvent.contentOffset.y, e.nativeEvent.layoutMeasurement.height, e.nativeEvent.contentSize.height);
@@ -143,7 +143,7 @@ export const NavigationSpringBar: React.FC<Props> = (props) => {
             {props.bodyContainer}
         </Animated.ScrollView>
     );
-};
+});
 
 NavigationSpringBar.defaultProps = {
     onPullUpShowHeaderHeight: 0,

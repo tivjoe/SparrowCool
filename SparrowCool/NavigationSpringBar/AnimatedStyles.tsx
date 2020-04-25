@@ -7,10 +7,10 @@ import { Animated } from 'react-native';
 // ScrollView,marginTo变化
 export const styleCrossHeaderBottom = (scrollY: Animated.Value, defaultHeaderHeight: number) => {
     return {
-        bottom: scrollY.interpolate({
+        translateY: scrollY.interpolate({
             inputRange: [0, defaultHeaderHeight],
-            outputRange: [0, 88],
-            extrapolate: 'clamp'
+            outputRange: [0, 0 - defaultHeaderHeight],
+            extrapolate: 'clamp',
         }),
     }
 }
@@ -20,7 +20,7 @@ export const styleDefaultOpacity = (scrollY: Animated.Value, defaultHeaderHeight
     return {
         opacity: scrollY.interpolate({
             inputRange: [0, defaultHeaderHeight],
-            outputRange: [1, 0.3]
+            outputRange: [1, 0],
         }),
         // transform: [{
         //     translateY: scrollY.interpolate({
@@ -37,8 +37,8 @@ export const styleOnPullUpOpacity = (scrollY: Animated.Value, defaultHeaderHeigh
     return {
         opacity: scrollY.interpolate({
             inputRange: [defaultHeaderHeight, defaultHeaderHeight + defaultHeaderHeight / 2],
-            outputRange: [0.3, 1],
-            extrapolate: 'clamp'
+            outputRange: [0, 1],
+            extrapolate: 'clamp',
         }),
         // transform: [{
         //     translateY: scrollY.interpolate({

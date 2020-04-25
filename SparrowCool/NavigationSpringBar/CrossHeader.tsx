@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, StyleSheet, View, Text } from 'react-native';
+import { Animated } from 'react-native';
 import { AnimatedHeader } from './AnimatedHeader';
 import { styleCrossHeaderBottom, styleDefaultOpacity, styleOnPullUpOpacity } from './AnimatedStyles';
 
@@ -19,7 +19,7 @@ export interface Props {
     isShowDefaultHeaderOnDown?: boolean;
 }
 
-export const CrossHeader: React.FC<Props> = (props) => {
+export const CrossHeader: React.FC<Props> = React.memo((props) => {
 
     return (
         <Animated.View
@@ -53,10 +53,5 @@ export const CrossHeader: React.FC<Props> = (props) => {
 
         </Animated.View>
     )
-}
 
-const styles = StyleSheet.create({
-    container: {
-
-    }
 });

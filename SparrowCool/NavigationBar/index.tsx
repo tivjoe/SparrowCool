@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, StyleProp, ViewStyle, } from 'react-native';
+import { View, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 
 /**
  * @file 自定义导航栏
@@ -22,9 +22,18 @@ export const NavigationBar: React.FC<Props> = (props) => {
                 {props.leftComponent}
             </View>
 
-            <View style={[styles.center, props.centerStyle]} >
-                {props.centerComponent}
-            </View>
+            {
+                props.centerComponent
+                    === undefined
+                    ?
+                    null
+                    :
+                    <View style={[styles.center, props.centerStyle]} >
+                        {props.centerComponent}
+                    </View>
+            }
+
+
 
             <View style={[styles.right, props.rightStyle]} >
                 {props.rightComponent}
