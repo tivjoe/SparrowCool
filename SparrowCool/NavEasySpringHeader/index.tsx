@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated, View, Text } from 'react-native';
+import { Animated, View } from 'react-native';
 
 import { styleOpacityDimension, styleOpacityMain } from './AnimatedStyles';
 import { AnimatedView } from './AnimatedView';
@@ -23,6 +23,7 @@ export const NavEasySpringHeader: React.FC<Props> = React.memo((props) => {
         <View style={{ flex: 1 }} >
             <Animated.FlatList
                 onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: true })}
+                // onScroll={Animated.event([{ nativeEvent: { contentOffset: { y: scrollY } } }], { useNativeDriver: false })} // 最方便的，禁用视觉上没有显示的点击事件，正在寻找更好的方案
                 {...props.listOptions}
             />
             <AnimatedView componentView={props.dimensionHeader} animatedStyles={styleOpacityDimension(scrollY, props.onHeightStartShowMain)} />

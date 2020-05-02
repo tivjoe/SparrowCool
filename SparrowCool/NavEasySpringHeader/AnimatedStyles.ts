@@ -11,6 +11,11 @@ export const styleOpacityMain = (scrollY: Animated.Value, onHeightStartShow: num
             inputRange: [onHeightStartShow, onHeightFullShowMain],
             outputRange: [0, 1],
         }),
+        // 最方便的，禁用视觉上没有显示的点击事件，正在寻找更好的方案
+        // zIndex: scrollY.interpolate({
+        //     inputRange: [onHeightStartShow, onHeightFullShowMain],
+        //     outputRange: [1, 10],
+        // }),
     }
 }
 
@@ -21,5 +26,10 @@ export const styleOpacityDimension = (scrollY: Animated.Value, onHeightStartShow
             inputRange: [onHeightStartShow, onHeightStartShow + 10],
             outputRange: [1, 0],
         }),
+        // 最方便的，禁用视觉上没有显示的点击事件，正在寻找更好的方案
+        // zIndex: scrollY.interpolate({
+        //     inputRange: [onHeightStartShow, onHeightStartShow + 10],
+        //     outputRange: [10, 1],
+        // }),
     }
 }
