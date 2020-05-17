@@ -11,8 +11,10 @@ export const styleOpacityMain = (scrollY: Animated.Value, onHeightStartShow: num
             inputRange: [onHeightStartShow, onHeightFullShowMain],
             outputRange: [0, 1],
         }),
-        zIndex: useNativeDriver === false
-            &&
+        zIndex: useNativeDriver === true
+            ?
+            undefined
+            :
             scrollY.interpolate({
                 inputRange: [onHeightStartShow, onHeightFullShowMain],
                 outputRange: [1, 10],
@@ -27,8 +29,10 @@ export const styleOpacityDimension = (scrollY: Animated.Value, onHeightStartShow
             inputRange: [onHeightStartShow, onHeightStartShow + 10],
             outputRange: [1, 0],
         }),
-        zIndex: useNativeDriver === false
-            &&
+        zIndex: useNativeDriver === true
+            ?
+            undefined
+            :
             scrollY.interpolate({
                 inputRange: [onHeightStartShow, onHeightStartShow + 10],
                 outputRange: [10, 1],
