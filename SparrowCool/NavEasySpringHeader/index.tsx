@@ -14,11 +14,31 @@ interface Props {
     listOptions: any, // FlatList 的props
     dimensionHeader?: React.ReactNode, // 次要的header
     useNativeDriver: boolean, // 是否启用原生驱动动画 如果次要导航栏没有点击事件建议启用，如果次要导航栏有点击事件请false
+    onScrollY?: (valueY: number) => void // 当滑动时，执行的回调
 }
 
 export const NavEasySpringHeader: React.FC<Props> = React.memo((props) => {
 
     const [scrollY] = React.useState(new Animated.Value(0));
+
+    React.useEffect(() => {
+
+        if (props.onScrollY) {
+            scrollY.removeAllListeners();
+            scrollY.addListener(({ value }) => {
+                if (props.onScrollY) {
+                    props.onScrollY(value);
+                }
+            });
+        }
+
+        return () => {
+            if (props.onScrollY) {
+                scrollY.removeAllListeners();
+            }
+        }
+
+    }, [])
 
     return (
         <View style={{ flex: 1 }} >
