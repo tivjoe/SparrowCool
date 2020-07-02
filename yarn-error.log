@@ -2,7 +2,7 @@ Arguments:
   C:\Program Files\nodejs\node.exe C:\Users\noobjoe\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js publish
 
 PATH: 
-  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\Python27\;D:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;d:\Git\cmd;d:\php7.3.6;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs\;D:\Java\jdk1.8.0_221\bin;C:\Users\noobjoe\AppData\Local\Microsoft\WindowsApps;D:\Microsoft VS Code\bin;C:\Users\noobjoe\AppData\Roaming\Composer\vendor\bin;D:\Android\Sdk\platform-tools;C:\Users\noobjoe\AppData\Roaming\npm
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;D:\Python27\;D:\Python27\Scripts;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;d:\Git\cmd;d:\php7.3.6;C:\ProgramData\ComposerSetup\bin;C:\Program Files\nodejs\;D:\Java\jdk1.8.0_221\bin;C:\Users\noobjoe\AppData\Local\Microsoft\WindowsApps;C:\Users\noobjoe\AppData\Roaming\Composer\vendor\bin;D:\Android\Sdk\platform-tools;C:\Users\noobjoe\AppData\Roaming\npm;d:\Microsoft VS Code\bin
 
 Yarn version: 
   1.22.0
@@ -29,7 +29,7 @@ Trace:
 npm manifest: 
   {
     "name": "sparrowcool",
-    "version": "0.0.6",
+    "version": "0.0.10",
     "description": "A UI library and native library with hooks for react native.",
     "main": "index.ts",
     "scripts": {
