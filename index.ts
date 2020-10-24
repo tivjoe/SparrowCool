@@ -1,4 +1,2 @@
-export { NavigationBar } from './SparrowCool/NavigationBar';
-export { NavigationBackBar } from './SparrowCool/NavigationBackBar';
-export { NavigationSpringBar } from './SparrowCool/NavigationSpringBar';
-export { NavEasySpringHeader } from './SparrowCool/NavEasySpringHeader';
+export { NavigationBar } from './sparrowcool/NavigationBar'; // 导航栏
+export { ScrollVaryNavbar } from './sparrowcool/ScrollVaryNavbar'; // 滚动时动态切换导航栏
