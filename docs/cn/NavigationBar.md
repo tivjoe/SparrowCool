@@ -24,11 +24,11 @@ import { NavigationBar } from 'sparrowcool'
 
 ## Props
 
-### 必填参数
+#### 必填参数
 
-> 无
+无
 
-### 可选参数
+#### 可选参数
 
 ### `style`
 导航栏容器的样式
