@@ -7,9 +7,9 @@ import { View, StyleSheet, TouchableOpacity, Dimensions, StyleProp, ViewStyle, T
  */
 export interface AlertComponentProps {
     cancelText?: string // 取消文本
-    cancelTextStyle: StyleProp<TextStyle> // 取消文本样式
+    cancelTextStyle?: StyleProp<TextStyle> // 取消文本样式
     confirmText?: string // 确定文本样式
-    confirmTextStyle: StyleProp<TextStyle> // 确定文本样式
+    confirmTextStyle?: StyleProp<TextStyle> // 确定文本样式
     backdropColor?: string // 背景幕布颜色
     alertContainerColor?: string // alert容器背景色
     alertContainerStyle?: StyleProp<ViewStyle> // alert容器样式
