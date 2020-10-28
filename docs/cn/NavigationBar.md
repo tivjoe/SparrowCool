@@ -24,11 +24,13 @@ import { NavigationBar } from 'sparrowcool'
 
 ## Props
 
-#### 必填参数
+### 必填参数
 
 无
 
-#### 可选参数
+---
+
+### 可选参数
 
 ### `style`
 导航栏容器的样式
@@ -36,6 +38,8 @@ import { NavigationBar } from 'sparrowcool'
 |类型|必填|
 | --- | --- |
 |StyleProp<ViewStyle>|否|
+
+---
     
 ### `leftStyle`
 导航栏左边容器样式
@@ -44,12 +48,16 @@ import { NavigationBar } from 'sparrowcool'
 | --- | --- |
 |StyleProp<ViewStyle>|否|
     
+---
+    
 ### `leftComponent`
 导航栏左边容器里面的组件
 
 |类型|必填|
 | --- | --- |
 |React.ReactNode|否|
+
+---
 
 ### `centerStyle`
 导航栏中间部分容器样式
@@ -58,6 +66,8 @@ import { NavigationBar } from 'sparrowcool'
 | --- | --- |
 |StyleProp<ViewStyle>|否|
     
+---
+    
 ### `centerComponent`
 导航栏中间容器里面的组件
 
@@ -65,12 +75,16 @@ import { NavigationBar } from 'sparrowcool'
 | --- | --- |
 |React.ReactNode|否|
 
+---
+
 ### `rightStyle`
 导航栏右边容器样式
 
 |类型|必填|
 | --- | --- |
 |StyleProp<ViewStyle>|否|
+    
+---
     
 ### `rightComponent`
 导航栏右边容器里面的组件
