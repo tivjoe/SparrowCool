@@ -5,7 +5,7 @@
 ## 使用
 
 ``` javascript
-import { NavigationBar } from 'sparrowcool'
+import { NavigationBar } from 'sparrowcool';
 
 <NavigationBar
     style={{}}
@@ -22,13 +22,13 @@ import { NavigationBar } from 'sparrowcool'
 
 |参数名|类型|必填|说明|
 | --- | --- | --- | --- |
-|style|StyleProp\<ViewStyle>|否|导航栏容器的样式|
-|leftStyle|StyleProp\<ViewStyle>|否|导航栏左边容器的样式|
-|leftComponent|React.ReactNode|否|导航栏左边容器里面的组件|
-|centerStyle|StyleProp\<ViewStyle>|否|导航栏中间容器的样式|
-|centerComponent|React.ReactNode|否|导航栏中间容器里面的组件|
-|rightStyle|StyleProp\<ViewStyle>|否|导航栏右边容器的样式|
-|rightComponent|React.ReactNode|否|导航栏右边容器里面的组件|
+|`style`|StyleProp\<ViewStyle>|否|导航栏容器的样式|
+|`leftStyle`|StyleProp\<ViewStyle>|否|导航栏左边容器的样式|
+|`leftComponent`|React.ReactNode|否|导航栏左边容器里面的组件|
+|`centerStyle`|StyleProp\<ViewStyle>|否|导航栏中间容器的样式|
+|`centerComponent`|React.ReactNode|否|导航栏中间容器里面的组件|
+|`rightStyle`|StyleProp\<ViewStyle>|否|导航栏右边容器的样式|
+|`rightComponent`|React.ReactNode|否|导航栏右边容器里面的组件|
 
 ---
 
