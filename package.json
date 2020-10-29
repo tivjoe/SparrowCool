@@ -1,6 +1,6 @@
 {
   "name": "sparrowcool",
-  "version": "0.0.10",
+  "version": "1.0.0",
   "description": "A UI library with hooks and typescript for react native.",
   "main": "index.ts",
   "scripts": {
