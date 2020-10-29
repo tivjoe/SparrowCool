@@ -8,6 +8,7 @@ React Native UI库
 * **完美支持TypeScript**
 * **组件在Android和Ios表现一致**
 * **跟随React/React Native新特性，新功能，面向未来拓展**
+* **轻量，简便，易用**
 
 ## 安装
 
